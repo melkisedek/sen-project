@@ -2,6 +2,7 @@
 
 # sen_project
 
+sen_project is a small library system . It is built with [Python][0] using the [Django Web Framework][1].
 
 This project has the following basic apps:
 
