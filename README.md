@@ -38,11 +38,11 @@ Install all dependencies:
     
 Create local project configaration on windows:
 
-    copy sen_project\settings\local.sample.env en_project\settings\local.env
+    copy sen_project\settings\local.sample.env sen_project\settings\local.env
     
 Create local project configaration on linux:
 
-    cp sen_project\settings\local.sample.env en_project\settings\local.env
+    cp sen_project\settings\local.sample.env sen_project\settings\local.env
 
 Run migrations:
 
