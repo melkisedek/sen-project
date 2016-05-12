@@ -11,6 +11,18 @@ This project has the following basic apps:
 * App3 (short desc)
 
 ## Installation
+#### Cloning behind a proxy
+
+To clone this repo from behind a proxy. You need to set the proxy on git. 
+For example, if you are a NUST student on nust-staff wifi, run:
+
+`$ git config --global http.proxy http://proxy.nust.na:3128`
+you can run: `git config --get http.proxy` to view the set proxy. Then run:
+
+`$ git clone http://github.com/melkisedek/sen_project.git` to clone it.
+And optionally run 
+
+`$ git config --global --unset http.proxy` to unset the proxy when you are not behind a proxy.
 
 ### Quick start
 
