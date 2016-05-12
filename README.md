@@ -35,6 +35,14 @@ comes with virtualenv built-in. So create a virtual env by:
 Install all dependencies:
 
     pip install -r requirements.txt
+    
+Create local project configaration on windows:
+
+    copy sen_project\settings\local.sample.env en_project\settings\local.env
+    
+Create local project configaration on linux:
+
+    cp sen_project\settings\local.sample.env en_project\settings\local.env
 
 Run migrations:
 
