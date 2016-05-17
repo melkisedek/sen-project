@@ -16,7 +16,7 @@ class Book(models.Model):
                                 upload_to='cover_pics/%Y-%m-%d/',
                                 null=True,
                                 blank=True)
-	add_date = models.DateTimeField('date added', default=date.today)	
+	add_date = models.DateTimeField('date added', default=datetime.now)	
 	def __str__(self):
 		return self.title + " by " + self.author
 
