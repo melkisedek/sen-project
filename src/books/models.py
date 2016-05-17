@@ -1,11 +1,13 @@
 from django.db import models
+from datetime import date
 from django.utils import timezone
 # Create your models here.
 
 class Book(models.Model):
 	title = models.CharField(max_length=200)
 	author = models.CharField(max_length=200)
-	year = models.DateTimeField('year published')
+	year = models.DateTimeField('year published',
+		help_text="Please use the following format: <em>YYYY-MM-DD</em>.")
 	pages = models.IntegerField(default=0)
 	isbn_10	= models.IntegerField(default=0)
 	isbn_13	= models.IntegerField(default=0)
@@ -14,7 +16,7 @@ class Book(models.Model):
                                 upload_to='cover_pics/%Y-%m-%d/',
                                 null=True,
                                 blank=True)
-	add_date = models.DateTimeField('date added')	
+	add_date = models.DateTimeField('date added', default=date.today)	
 	def __str__(self):
 		return self.title + " by " + self.author
 
