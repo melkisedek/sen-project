@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }}Home{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="home" %}
+{% endblock %}
+
+
+{% block navbar-right %}
+  {% if not user.is_authenticated %}
+<a class="btn btn-default" href="{% url 'accounts:login' %}" role="button">Log in</a>
+<a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">Sign up</a>
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock %}
+
+{% block container %}
+<div class="container">
+  <div class="text-center">
+    <h2>IT FACULTY LIBRARY</h2>
+
+	<ul>
+	{% for book in recently_added.all %}
+		<h1>{{ book.title |title}}</h1>
+	    <li>{{ book.edition }}</li>
+	    <li>{{ book.author |title}}</li>
+	    <li>{{ book.year }}</li>
+	    <li>{{ book.pages }}</li>
+	    <li>{{ book.isbn_10 }}</li>
+	    <li>{{ book.isbn_13 }}</li>
+	    <li>{{ book.description }}</li>
+	    <li><img src="{{ book.cover_image.url }}"></li>
+	    <li>{{ book.date_added }}</li>
+	{% endfor %}
+	</ul>
+
+  </div>
+  {% block form %}
+  {% endblock %}
+</div>
+
+{% endblock container %}
+
+{% block scripts %}
+{% endblock scripts %}
