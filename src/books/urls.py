@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns = [
     # the 'name' value as called by the {% url %} template tag
-    url(r'^$', views.newly_added, name="newly_added"),
+    url(r'^new/$', views.ShowNew.as_view(), name="newly_added"),
 ]
