@@ -20,9 +20,22 @@
 {% endblock %}
 
 {% block container %}
-<div class="container">
-  <div class="text-center">
-    <h2>IT FACULTY LIBRARY</h2>
+
+<div class="container-fluid">
+  <div class="row">
+<div class="col-xs-2">
+
+  	<ul class="list-group sidebar-offcanvas" id="sidebar">
+    <a class="list-group-item active" href="#">Cras justo odio<span class="badge">14</span>
+    </a>
+  <a class="list-group-item" href="#">Middle</a>
+  <a class="list-group-item" href="#">Right</a>
+
+</ul>
+  </div>
+  
+    <div class="col-lg-8">
+      <h2>IT FACULTY LIBRARY</h2>
 
 	<ul>
 	{% for book in recently_added.all %}
@@ -38,13 +51,12 @@
 	    <li>{{ book.date_added }}</li>
 	{% endfor %}
 	</ul>
-
+    </div>
   </div>
-  {% block form %}
-  {% endblock %}
 </div>
 
 {% endblock container %}
 
 {% block scripts %}
+<script src="{% static 'site/js/site.js' %}"></script>
 {% endblock scripts %}
