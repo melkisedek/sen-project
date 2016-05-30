@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load staticfiles %}
+{% load thumbnail %}
 {% load crispy_forms_tags %}
 
 {% block title %}{{ block.super }}Home{% endblock %}
@@ -47,7 +48,7 @@
 	    <li>{{ book.isbn_10 }}</li>
 	    <li>{{ book.isbn_13 }}</li>
 	    <li>{{ book.description }}</li>
-	    <li><img src="{{ book.cover_image.url }}"></li>
+	    <li><img src="{% thumbnail book.cover_image|default:'default_book.png' 140x140 crop %}"></li>
 	    <li>{{ book.date_added }}</li>
 	{% endfor %}
 	</ul>
