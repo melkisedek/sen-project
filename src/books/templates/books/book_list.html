@@ -1,0 +1,121 @@
+{% extends "base_two_columns.html" %}
+
+{% load staticfiles %}
+{% load thumbnail %}
+{% load crispy_forms_tags %}
+{% load utility_tags %}
+
+{% block title %}{{ block.super }}Home{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="home" %}
+{% endblock %}
+
+{% block navbar-right %}
+  {% if not user.is_authenticated %}
+<a class="btn btn-default" href="{% url 'accounts:login' %}" role="button">Log in</a>
+<a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">Sign up</a>
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock %}
+
+{% block sidebar%}
+<div class="filters panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h6 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseAuthors">Filter by Author
+                </a>
+            </h6>
+        </div>
+        <div id="collapseAuthors" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="list-group">
+                    <a class="list-group-item{% if not facets.selected.author %} active{% endif %}" href="{% append_to_query author="" page="" %}">All</a>
+                    {% for cat in facets.categories.authors %}
+                        <a class="list-group-item{% if facets.selected.author == cat %} active{% endif %}" href="{% append_to_query author=cat.pk page="" %}">{{ cat }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h6 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapsePublishers">Filter by Publisher
+                </a>
+            </h6>
+        </div>
+        <div id="collapsePublisher" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="list-group">
+                    <a class="list-group-item{% if not facets.selected.publisher %} active{% endif %}" href="{% append_to_query publisher="" page="" %}">All</a>
+                    {% for cat in facets.categories.publishers %}
+                        <a class="list-group-item{% if facets.selected.publisher == cat %} active{% endif %}" href="{% append_to_query publisher=cat.pk page="" %}">{{ cat }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h6 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseBooks">Filter by Book
+                </a>
+            </h6>
+        </div>
+        <div id="collapseBooks" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="list-group">
+                    <a class="list-group-item{% if not facets.selected.book %} active{% endif %}" href="{% append_to_query book="" page="" %}">All</a>
+                    {% for cat in facets.categories.books %}
+                        <a class="list-group-item{% if facets.selected.book == cat %} active{% endif %}" href="{% append_to_query book=cat.pk page="" %}">{{ cat }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock sidebar%}
+
+{% block content %}
+<div class="book_list">
+    {% for book in object_list %}
+        <div class="book alert alert-info">
+            <p>{{ book.name}}</p>
+        </div>
+    {% endfor %}
+</div>
+
+{% if object_list.has_other_pages %}
+    <ul class="pagination">
+        {% if object_list.has_previous %}
+            <li><a href="{% append_to_query page=object_list.previous_page_number %}">&laquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for page_number in object_list.paginator.page_range %}
+            {% if page_number == object_list.number %}
+                <li class="active">
+                    <span>{{ page_number }} <span class="sr-only">(current)</span></span>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{% append_to_query page=page_number %}">{{ page_number }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        {% if object_list.has_next %}
+            <li><a href="{% append_to_query page=object_list.next_page_number %}">&raquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+    </ul>
+{% endif %}
+{% endblock content %}
+
+<script src="{%static 'site/js/jquery.jscroll.min.js' %}"></script>
+<script src="{% static 'site/js/list.js' %}"></script>

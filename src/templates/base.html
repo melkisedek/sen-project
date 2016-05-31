@@ -92,36 +92,33 @@
       {% endif %}
     {% endblock %}
 
-    {% block splash %}
-    {% endblock splash %}
-    
-    {% block container %}
+{% block container %}
     <div class="container">
-
-      <div class="starter-template">
-        <h1>New Project</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-      </div>
-
-    </div><!-- /.container -->
-    {% endblock container %}
+        <div class="row">
+            <div id="content" class="col-md-12">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock container%}
 
     <!-- Site footer -->
     {% block footer %}
       <!-- Some social button for contact will do -->
       <a name="contact"></a>
       <div class="container">
-            <div class="footer">
-        <div class="row">
-          <div class="col-lg-6">
-              <p>&copy; SET-IT {% now 'Y' %}</p>
+            <div class="footer clearfix">
+          <div class="row">
+            <div class="col-lg-6">
+                <p>&copy; SET-IT {% now 'Y' %}</p>
+            </div>
+            <div class="col-lg-6 text-right">
+              Connect with us on
+              <a href="#"><i class="fa fa-facebook"></i> Facebook</a> or
+              <a href="#"><i class="fa fa-twitter"></i> Twitter</a>
+            </div>
           </div>
-          <div class="col-lg-6 text-right">
-            Connect with us on
-            <a href="#"><i class="fa fa-facebook"></i> Facebook</a> or
-            <a href="#"><i class="fa fa-twitter"></i> Twitter</a>
-          </div>
-        </div>
             </div>
       </div>
     {% endblock %}

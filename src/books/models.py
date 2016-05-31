@@ -3,10 +3,25 @@ from datetime import datetime
 from django.utils import timezone
 # Create your models here.
 
+class Author(models.Model):
+	first_name = models.CharField(max_length=60)
+	last_name = models.CharField(max_length=60)
+	def __str__(self):
+		return self.first_name + ' ' + self.last_name
+
+class Publisher(models.Model):
+	"""docstring for Publisher"""
+	name = models.CharField(max_length=200)
+	address = models.TextField(blank=True)
+	def __str__(self):
+		return self.name
+		
+
 class Book(models.Model):
-	title = models.CharField(max_length=200)
+	name = models.CharField(max_length=200)
 	edition = models.SmallIntegerField(default=1)
-	author = models.CharField(max_length=200)
+	authors = models.ManyToManyField(Author, blank=True)
+	publisher = models.ManyToManyField(Publisher, blank=True)
 	year = models.DateTimeField('year published',
 		help_text="Please use the following format: <em>YYYY-MM-DD</em>.",
 		blank=True)

@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% load staticfiles %}
+{% load staticfiles %}
+{% load thumbnail %}
 {% load crispy_forms_tags %}
 
 {% block title %}{{ block.super }}Home{% endblock %}
@@ -18,17 +20,19 @@
   {% endif %}
 {% endblock %}
 
+{% block sidebar%}
+
+{% endblock sidebar%}
+
 {% block splash %}
-  <div class="jumbotron jumbotron-carousel corporate-jumbo">
+  <div class="jumbotron jumbotron-carousel">
     <div class="container">
       <div class="row">
+
         <div class="col-md-8 col-sm-8">
           <h1>{% include "_brandname.html" %}</h1>
           <p>Library book loaning system used within the Namibian University of Science and Technology faculties.</p>
 	  <a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">Sign up for Free!</a>
-        </div>
-        <div class="col-md-4 col-sm-4">
-
         </div>
       </div>
     </div>

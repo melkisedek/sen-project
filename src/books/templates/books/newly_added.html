@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_two_colomns.html" %}
 
 {% load staticfiles %}
 {% load thumbnail %}
@@ -20,43 +20,11 @@
   {% endif %}
 {% endblock %}
 
-{% block container %}
+{% block sidebar%}
+{% endblock sidebar%}
 
-<div class="container-fluid">
-  <div class="row">
-<div class="col-xs-2">
-
-  	<ul class="list-group sidebar-offcanvas" id="sidebar">
-    <a class="list-group-item active" href="#">Cras justo odio<span class="badge">14</span>
-    </a>
-  <a class="list-group-item" href="#">Middle</a>
-  <a class="list-group-item" href="#">Right</a>
-
-</ul>
-  </div>
-  
-    <div class="col-lg-8">
-      <h2>IT FACULTY LIBRARY</h2>
-
-	<ul>
-	{% for book in recently_added.all %}
-		<h1>{{ book.title |title}}</h1>
-	    <li>{{ book.edition }}</li>
-	    <li>{{ book.author |title}}</li>
-	    <li>{{ book.year }}</li>
-	    <li>{{ book.pages }}</li>
-	    <li>{{ book.isbn_10 }}</li>
-	    <li>{{ book.isbn_13 }}</li>
-	    <li>{{ book.description }}</li>
-	    <li><img src="{% thumbnail book.cover_image|default:'default_book.png' 140x140 crop %}"></li>
-	    <li>{{ book.date_added }}</li>
-	{% endfor %}
-	</ul>
-    </div>
-  </div>
-</div>
-
-{% endblock container %}
+{% block container%}
+{% endblock container%}
 
 {% block scripts %}
 <script src="{% static 'site/js/site.js' %}"></script>
