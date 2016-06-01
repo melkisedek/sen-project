@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_two_columns.html" %}
 
 {% load staticfiles %}
 {% load staticfiles %}
@@ -21,26 +21,26 @@
 {% endblock %}
 
 {% block sidebar%}
-
+<ul class="list-group">
+  <a class="list-group-item" href="{% url 'books:book_list' %}">
+  Catalogue
+    <span class="badge">{{count}}</span>
+  </a>
+  <a class="list-group-item" href="#">
+  Books on loan
+    <span class="badge">14</span>
+  </a>
+  <a class="list-group-item" href="{% url 'about' %}">
+  Contact Us
+  </a>
+</ul>
 {% endblock sidebar%}
 
-{% block splash %}
-  <div class="jumbotron jumbotron-carousel">
-    <div class="container">
-      <div class="row">
-
-        <div class="col-md-8 col-sm-8">
-          <h1>{% include "_brandname.html" %}</h1>
+{% block content%}
+<div class="well"><h1>{% include "_brandname.html" %}</h1>
           <p>Library book loaning system used within the Namibian University of Science and Technology faculties.</p>
-	  <a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">Sign up for Free!</a>
-        </div>
-      </div>
-    </div>
-  </div>
-{% endblock splash %}
-
-{% block container %}
-{% endblock container %}
+    <a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">Sign up for Free!</a></div>
+{% endblock content%}
 
 {% block scripts %}
 <script src="{% static 'site/js/site.js' %}"></script>
