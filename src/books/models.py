@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.utils import timezone
+from django.conf import settings
 # Create your models here.
 
 class Author(models.Model):
@@ -16,8 +17,7 @@ class Publisher(models.Model):
 	address = models.TextField(blank=True)
 	website = models.URLField(blank=True)
 	def __str__(self):
-		return self.name
-		
+		return self.name		
 
 class Book(models.Model):
 	name = models.CharField(max_length=200)
@@ -33,7 +33,8 @@ class Book(models.Model):
                                 upload_to='cover_pics/%Y-%m-%d/',
                                 null=True,
                                 blank=True)
-	date_added = models.DateTimeField(default=datetime.now)	
+	date_added = models.DateTimeField(default=datetime.now)
+	available = models.BooleanField(default=True)	
 	def __str__(self):
 		if self.edition==1:
 			nth="st"
@@ -46,3 +47,10 @@ class Book(models.Model):
 
 	def was_added_recently(self):
 		return self.date_added >= timezone.now() - datetime.timedelta(days=30)
+
+class Loaned(models.Model):
+	loaned_by = models.ForeignKey(settings.AUTH_USER_MODEL)
+	book = models.ForeignKey(Book)
+
+	class Meta:
+		verbose_name = "Loaned Book"
