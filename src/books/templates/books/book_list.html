@@ -48,31 +48,12 @@
                 </a>
             </h6>
         </div>
-        <div id="collapsePublishers" class="panel-collapse collapse">
+        <div id="collapsePublishers" class="panel-collapse collapse in">
             <div class="panel-body">
                 <div class="list-group">
                     <a class="list-group-item{% if not facets.selected.publisher %} active{% endif %}" href="{% append_to_query publisher="" page="" %}">All</a>
                     {% for cat in facets.categories.publishers %}
                         <a class="list-group-item{% if facets.selected.publisher == cat %} active{% endif %}" href="{% append_to_query publisher=cat.pk page="" %}">{{ cat }}</a>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h6 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseBooks">Filter by Book
-                </a>
-            </h6>
-        </div>
-        <div id="collapseBooks" class="panel-collapse collapse">
-            <div class="panel-body">
-                <div class="list-group">
-                    <a class="list-group-item{% if not facets.selected.book %} active{% endif %}" href="{% append_to_query book="" page="" %}">All</a>
-                    {% for cat in facets.categories.books %}
-                        <a class="list-group-item{% if facets.selected.book == cat %} active{% endif %}" href="{% append_to_query book=cat.pk page="" %}">{{ cat }}</a>
                     {% endfor %}
                 </div>
             </div>
