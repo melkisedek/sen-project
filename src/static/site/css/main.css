@@ -132,16 +132,6 @@ body>.navbar-transparent {
     padding: 120px 0;
 }
 
-#map-outer {
-    height: 440px;
-    padding: 40px 20px;
-    margin-bottom: 20px;
-    background-color:#FFF
-}
-
-#map-container {
-    height: 400px
-}
 
 .img-dim {
     opacity: 0.5;
@@ -176,13 +166,6 @@ body>.navbar-transparent {
 
 .form-box form .form-control:focus {
   z-index: 2;
-}
-
-#sidebar {
-padding-top: 80px; 
- position: fixed;
- top:0;
- left:0;
 }
 
 /*The fixed navbar will overlay your other content,
