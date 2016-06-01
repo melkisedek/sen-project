@@ -22,9 +22,7 @@ class Book(models.Model):
 	edition = models.SmallIntegerField(default=1)
 	authors = models.ManyToManyField(Author, blank=True)
 	publisher = models.ManyToManyField(Publisher, blank=True)
-	year = models.DateTimeField('year published',
-		help_text="Please use the following format: <em>YYYY-MM-DD</em>.",
-		blank=True)
+	published = models.PositiveSmallIntegerField(blank=True)
 	pages = models.IntegerField(default=0)
 	isbn_10	= models.IntegerField(default=0,help_text="Do not include dashes")
 	isbn_13	= models.IntegerField(default=0,help_text="Do not include dashes")
