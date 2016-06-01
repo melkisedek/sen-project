@@ -42,7 +42,7 @@ class Book(models.Model):
 		elif self.edition==3:
 			nth="rd"
 		else : nth="th"
-		return self.title + ", "+ str(self.edition)+nth + " Edition by " + self.author
+		return self.name + ", "+ str(self.edition)+nth + " Edition"
 
 	def was_added_recently(self):
 		return self.date_added >= timezone.now() - datetime.timedelta(days=30)
