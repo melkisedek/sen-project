@@ -84,8 +84,13 @@
 {% block content %}
 <div class="book_list">
     {% for book in object_list %}
-        <div class="book alert alert-info">
-            <p>{{ book.name}}</p>
+        <div class="book panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ book.name}}</h3>
+          </div>
+          <div class="panel-body">
+           <a href="{% url 'books:book_detail' book.id %}">Details</a>
+          </div>
         </div>
     {% endfor %}
 </div>

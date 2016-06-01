@@ -17,7 +17,7 @@ class ShowNew(LoginRequiredMixin, generic.TemplateView):
 		context = {'recently_added': recently_added}
 		return render(request, 'books/newly_added.html', context)
 
-class BookList(LoginRequiredMixin, generic.View):
+class BookList(LoginRequiredMixin, generic.ListView):
 	form_class = BookFilterForm
 	template_name = "books/book_list.html"
 	paginate_by = 1
@@ -78,3 +78,8 @@ class BookList(LoginRequiredMixin, generic.View):
 			# If page is out of range, show last existing page.
 			page = paginator.page(paginator.num_pages)
 		return page
+
+class BookDetail(LoginRequiredMixin, generic.DetailView):
+	template_name = "books/book_detail.html"
+	context_object_name = 'book_details'
+	model = Book

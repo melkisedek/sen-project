@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load thumbnail %}
+{% load crispy_forms_tags %}
+{% load utility_tags %}
+
+{% block title %}{{ block.super }}Home{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="home" %}
+{% endblock %}
+
+{% block navbar-right %}
+  {% if not user.is_authenticated %}
+<a class="btn btn-default" href="{% url 'accounts:login' %}" role="button">Log in</a>
+<a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">Sign up</a>
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock %}
+
+{% block sidebar%}
+{% endblock sidebar%}
+
+{% block content %}
+<div class="book_list">
+        <div class="book panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ book_details.name}}</h3>
+          </div>
+          <div class="panel-body">
+           {{book_details.author }}
+           {{book_details.description }}
+          </div>
+        </div>
+</div>
+{% endblock content %}
+
+<script src="{%static 'site/js/jquery.jscroll.min.js' %}"></script>
+<script src="{% static 'site/js/list.js' %}"></script>
