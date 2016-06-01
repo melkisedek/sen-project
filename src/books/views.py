@@ -56,7 +56,7 @@ class BookList(LoginRequiredMixin, generic.ListView):
 			publisher = form.cleaned_data['publisher']
 			if publisher:
 				facets['selected']['publisher'] = publisher
-				qs = qs.filter(publishers=publisher).distinct()
+				qs = qs.filter(publisher=publisher).distinct()
 
 			book = form.cleaned_data['book']
 			if book:
