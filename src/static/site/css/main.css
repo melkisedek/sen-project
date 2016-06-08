@@ -132,6 +132,16 @@ body>.navbar-transparent {
     padding: 120px 0;
 }
 
+#map-outer {
+  height: 440px;
+  padding: 40px 20px;
+  margin-bottom: 20px;
+  background-color:#FFF
+}
+
+#map-container {
+  height: 400px
+}
 
 .img-dim {
     opacity: 0.5;
