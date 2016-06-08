@@ -54,9 +54,11 @@ class Book(models.Model):
 	def was_added_recently(self):
 		return self.date_added >= timezone.now() - datetime.timedelta(days=30)
 
+
 class Loaned(models.Model):
 	loaned_by = models.ForeignKey(settings.AUTH_USER_MODEL)
 	book = models.ForeignKey(Book)
-
+	timestamp = models.DateTimeField()
+	
 	class Meta:
 		verbose_name = "Loaned Book"
