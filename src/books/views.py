@@ -20,7 +20,7 @@ class ShowNew(LoginRequiredMixin, generic.TemplateView):
 class BookList(LoginRequiredMixin, generic.ListView):
 	form_class = BookFilterForm
 	template_name = "books/book_list.html"
-	paginate_by = 1
+	paginate_by = 10
 
 	def get(self, request, *args, **kwargs):
 		form = self.form_class(data=request.GET)
@@ -44,7 +44,6 @@ class BookList(LoginRequiredMixin, generic.ListView):
 			'categories': {
 				'authors': Author.objects.all(),
 				'publishers': Publisher.objects.all(),
-				'book': Book.objects.all(),
 			},
 		}
 		if form.is_valid():
@@ -57,11 +56,6 @@ class BookList(LoginRequiredMixin, generic.ListView):
 			if publisher:
 				facets['selected']['publisher'] = publisher
 				qs = qs.filter(publisher=publisher).distinct()
-
-			book = form.cleaned_data['book']
-			if book:
-				facets['selected']['book'] = book
-				qs = qs.filter(books=book).distinct()
 
 		return qs, facets
 
