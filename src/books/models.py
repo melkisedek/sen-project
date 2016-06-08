@@ -58,7 +58,10 @@ class Book(models.Model):
 class Loaned(models.Model):
 	loaned_by = models.ForeignKey(settings.AUTH_USER_MODEL)
 	book = models.ForeignKey(Book)
-	timestamp = models.DateTimeField()
-	
+	timestamp = models.DateTimeField(auto_now_add=True)
+
+	def __str__(self):
+		return self.book.name
+
 	class Meta:
 		verbose_name = "Loaned Book"
