@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.utils import timezone
 from django.conf import settings
+from django.core.urlresolvers import reverse
 # Create your models here.
 
 class Author(models.Model):
@@ -34,7 +35,12 @@ class Book(models.Model):
                                 null=True,
                                 blank=True)
 	date_added = models.DateTimeField(default=datetime.now)
-	available = models.BooleanField(default=True)	
+	available = models.BooleanField(default=True)
+	# this method causes a button labelled "View on site" to 
+	# appear in the top right-hand side in book admin page.
+	def get_absolute_url(self):
+		return reverse('books:book_detail', args=[self.id])
+
 	def __str__(self):
 		if self.edition==1:
 			nth="st"
