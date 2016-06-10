@@ -2,11 +2,6 @@
 <html lang="en">
     {% load staticfiles %}
     {% load thumbnail %}
-  <div class="page-header">
-  <center>
-    <img src="{% static 'images/nust.png' %}" style=" width:50%;height:3% ">
-    </center>
-    </div>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,7 +11,9 @@
     <link rel="shortcut icon" href="{% static 'site/ico/favicon.ico' %}">
 
     <title>{% block title %}{% include "_brandname.html" %} :: {% endblock %}</title>
-
+    <div class="page-header">
+      <center><img src="{% static 'site/img/head.png' %}" style=" width:50%;height:3% "></center>
+    </div>
     <!-- Bootstrap core CSS -->
     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
