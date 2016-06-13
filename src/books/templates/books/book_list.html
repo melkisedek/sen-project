@@ -71,11 +71,39 @@
 {% block content %}
 <div class="book_list">
     {% for book in object_list %}
-        <div class="book panel panel-default">
+        <div class="book panel panel-info">
           <div class="panel-heading">
-            <h3 class="panel-title">{{ book.name}}</h3>
+            <h4 class="panel-title">{{ book.name |title }}</h4>
           </div>
           <div class="panel-body">
+            <div class="media">
+              <div class="media-left">
+                  <img class="media-object" src="{% thumbnail book.cover_image|default:'default_book.png' 140x140 crop %}" alt="Thumbnail of {{book.name}}">
+              </div>
+              <div class="media-body">
+                <h3 class="media-heading">
+                    {% if book.authors %} 
+                        {%for author in book.authors.all %}
+                        {{author |title }},
+                        {% endfor %}
+                    {% else %} 
+                    Author(s) Unkown
+                    {%endif%}
+                </h3>
+                {% if book.isbn_10 %}
+                    ISBN 10: {{ book.isbn_10 }}
+                {%endif%}
+                {% if book.isbn_13 %}
+                    ISBN 13: {{ book.isbn_13 }}
+                {%endif%}
+                <p>Year of Publication: {{book.published}}</p>
+                <p>Description: 
+                {% if book.description %}
+                    {{ book.description |linebreaks | truncatechars:300}}
+                {% endif %}
+                </p>
+              </div>
+            </div>
            <a href="{% url 'books:book_detail' book.id %}">Details</a>
           </div>
         </div>

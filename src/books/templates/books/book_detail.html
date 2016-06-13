@@ -30,8 +30,67 @@
             <h3 class="panel-title">{{ book_details.name}}</h3>
           </div>
           <div class="panel-body">
-           {{book_details.author }}
-           {{book_details.description }}
+            <div class="media">
+              <div class="media-left">
+                  <img class="media-object" src="{% thumbnail book_details.cover_image|default:'default_book.png' 140x140 crop %}" alt="Thumbnail of {{book_details.name}}">
+              </div>
+              <div class="media-body">
+                <div class="row">
+                  <div class="col-xs-4">
+                  {% if book_details.isbn_10 %}
+                    ISBN 10: {{ book_details.isbn_10 }}
+                  {%endif%}
+                  {% if book_details.isbn_13 %}
+                      ISBN 13: {{ book_details.isbn_13 }}
+                  {%endif%}
+                  {% if book_details.pages %}
+                      <p>Pages: {{ book_details.pages }}</p>
+                  {%endif%}
+                  <p>Year of Publication: {{book_details.published}}</p>
+                  <p>Edition: {{book_details.edition}}</p>
+                  {% if book_details.date_added %}
+                      <p>Added to Database on: {{ book_details.date_added }}</p>
+                  {%endif%}
+                  {% if book_details.avaible %}
+                      <p class="text-primary">Available</p>
+                  {% else%}
+                        <p class="text-info">This book is Unavailable at this moment</p>
+                  {%endif%}
+                  </div>
+
+                  <div class="col-xs-8">
+                    {%for author in book_details.authors.all %}
+                      {% if author %} 
+                        Author: {{author |title }},
+                            {% if author.email %} 
+                              Email:{{ author.email |lower }}
+                            {%endif%}
+                      {% else %} 
+                        Author(s) Unkown
+                      {%endif%}
+                    {% endfor %}
+
+                      {% if book_details.publisher.first %} 
+                        <p>Publisher: {{book_details.publisher.first|title }}</p>
+                          {% if book_details.publisher.first.address %} 
+                            <p>Address: {{book_details.publisher.first.address|title }}</p>
+                          {%endif%}
+                          {% if book_details.publisher.first.website %} 
+                            <p>Website: <a href="{{book_details.publisher.first.website|lower}}">{{book_details.publisher.first.website|lower}}</a></p>
+                          {%endif%}
+                      {% else %} 
+                        Publisher(s) Unkown
+                      {%endif%}
+                  </div>
+
+                </div>
+                <p>Description:
+                {% if book_details.description %}
+                    {{ book_details.description |linebreaks}}
+                {% endif %}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 </div>
