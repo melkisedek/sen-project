@@ -20,7 +20,7 @@ class ShowNew(LoginRequiredMixin, generic.TemplateView):
 class BookList(LoginRequiredMixin, generic.ListView):
 	form_class = BookFilterForm
 	template_name = "books/book_list.html"
-	paginate_by = 10
+	paginate_by = 4
 
 	def get(self, request, *args, **kwargs):
 		form = self.form_class(data=request.GET)
