@@ -33,6 +33,9 @@
             <div class="media">
               <div class="media-left">
                   <img class="media-object img-thumbnail" src="{% thumbnail book_details.cover_image|default:'default_book.png' 140x140 crop %}" alt="Thumbnail of {{book_details.name}}">
+                  <p> This book is <strong>{%if loan %}out{% else %}in{% endif %}</strong>.</p>
+                  <a href="#" class="btn btn-primary">Loan</a>
+                  <a href="#" class="btn btn-success">Return</a>
               </div>
               <div class="media-body">
                 <div class="row">
@@ -51,11 +54,12 @@
                   {% if book_details.date_added %}
                       <p>Added to Database on: {{ book_details.date_added }}</p>
                   {%endif%}
-                  {% if book_details.avaible %}
+
+                  <!-- {% if book_details.avaible %}
                       <p class="text-primary">Available</p>
                   {% else%}
                         <p class="text-info">This book is Unavailable at this moment</p>
-                  {%endif%}
+                  {%endif%} -->
                   </div>
 
                   <div class="col-xs-8">

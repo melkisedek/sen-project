@@ -74,9 +74,20 @@ class BookList(LoginRequiredMixin, generic.ListView):
 		return page
 
 class BookDetail(LoginRequiredMixin, generic.DetailView):
+	''' Book info should show some loan info.''' 
 	template_name = "books/book_detail.html"
 	context_object_name = 'book_details'
 	model = Book
+
+	def get_context_data(self, **kwargs):
+		context = super(BookDetail, self).get_context_data(**kwargs)
+		try:
+			context['loan'] = Loaned.objects.get(book=self.get_object())
+		except (KeyError, Loaned.DoesNotExist):
+			context['loan'] = False
+		else:
+			context['loan'] = True
+		return context
 
 class LoanList(LoginRequiredMixin, generic.ListView):
 	template_name = "books/loans.html"
