@@ -34,8 +34,12 @@
               <div class="media-left">
                   <img class="media-object img-thumbnail" src="{% thumbnail book_details.cover_image|default:'default_book.png' 140x140 crop %}" alt="Thumbnail of {{book_details.name}}">
                   <p> This book is <strong>{%if loan %}out{% else %}in{% endif %}</strong>.</p>
-                  <a href="#" class="btn btn-primary">Loan</a>
+                  {%if loan %}
                   <a href="#" class="btn btn-success">Return</a>
+                  {% else%}
+                  <a href="#" class="btn btn-primary">Loan</a>
+                  {% endif%}
+                  
               </div>
               <div class="media-body">
                 <div class="row">
