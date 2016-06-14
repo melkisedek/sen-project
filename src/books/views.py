@@ -117,7 +117,7 @@ def loanout(request, book_id):
 				}, context_instance=RequestContext(request,
 					{ 'loan': 'True',}))
 	else:
-		return render_to_response('books/book_details.html', {
+		return render_to_response('books/book_detail.html', {
 				'book_details': b,
 				'messages': 'You are not a staff member. Contact administrator'
 				}, context_instance=RequestContext(request))
@@ -141,7 +141,7 @@ def returnin(request, book_id):
 				}, context_instance=RequestContext(request,
 					{ 'loan': 'False',}))
 	else:
-		return render_to_response('books/book_details.html', {
+		return render_to_response('books/book_detail.html', {
 				'book_details': b,
 				'messages': 'You are not a staff member. Contact administrator'
 				}, context_instance=RequestContext(request))
