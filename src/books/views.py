@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from braces.views import LoginRequiredMixin
-from .models import Author, Publisher, Book
+from .models import Author, Publisher, Book, Loaned
 from .forms import BookFilterForm
 
 
@@ -77,3 +77,8 @@ class BookDetail(LoginRequiredMixin, generic.DetailView):
 	template_name = "books/book_detail.html"
 	context_object_name = 'book_details'
 	model = Book
+
+class LoanList(LoginRequiredMixin, generic.ListView):
+	template_name = "books/loans.html"
+	context_object_name = 'loan_list'
+	model = Loaned

@@ -59,6 +59,7 @@ class Loaned(models.Model):
 	loaned_by = models.ForeignKey(settings.AUTH_USER_MODEL)
 	book = models.ForeignKey(Book)
 	timestamp = models.DateTimeField(auto_now_add=True)
+	returned = models.BooleanField(default=False)
 
 	def __str__(self):
 		return self.book.name
