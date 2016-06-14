@@ -1,5 +1,8 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, render_to_response
 from django.views import generic
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.template import RequestContext
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from braces.views import LoginRequiredMixin
 from .models import Author, Publisher, Book, Loaned
@@ -93,3 +96,52 @@ class LoanList(LoginRequiredMixin, generic.ListView):
 	template_name = "books/loans.html"
 	context_object_name = 'loan_list'
 	model = Loaned
+
+def loanout(request, book_id):
+	b = get_object_or_404(Book, pk=book_id)
+	if request.user.is_authenticated and request.user.is_staff:
+		try: # If book not in loaned table, add it
+			loan = Loaned.objects.get(book=b)
+		except (KeyError, Loaned.DoesNotExist):
+			loan = Loaned(book=b,loaned_by=request.user)
+			loan.save()
+			return render_to_response('books/book_detail.html', {
+				'book_details': b,
+				'messages': 'Success. Please contact secretary to retreave the book'
+				}, context_instance=RequestContext(request,
+					{ 'loan': 'True',}))
+		else:
+			return render_to_response('books/book_detail.html', {
+				'book_details': b,
+				'messages': 'That book is already loaned out.'
+				}, context_instance=RequestContext(request,
+					{ 'loan': 'True',}))
+	else:
+		return render_to_response('books/book_details.html', {
+				'book_details': b,
+				'messages': 'You are not a staff member. Contact administrator'
+				}, context_instance=RequestContext(request))
+
+def returnin(request, book_id):
+	b = get_object_or_404(Book, pk=book_id)
+	if request.user.is_authenticated and request.user.is_staff:
+		try: 
+			loan = Loaned.objects.get(book=b)
+			loan.delete()
+			return render_to_response('books/book_detail.html', {
+				'book_details': b,
+				'messages': 'Success. Please contact secretary to Return the book'
+				}, context_instance=RequestContext(request,
+					{ 'loan': 'False',}))
+
+		except (KeyError, Loaned.DoesNotExist):
+			return render_to_response('books/book_detail.html', {
+				'book_details': b,
+				'messages': 'Error occured.'
+				}, context_instance=RequestContext(request,
+					{ 'loan': 'False',}))
+	else:
+		return render_to_response('books/book_details.html', {
+				'book_details': b,
+				'messages': 'You are not a staff member. Contact administrator'
+				}, context_instance=RequestContext(request))
